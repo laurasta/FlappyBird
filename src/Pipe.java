@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.util.Random;
 
 public class Pipe {
 
@@ -17,17 +18,25 @@ public class Pipe {
         reset();
     }
 
+    // Introduce a performance issue by using Random instance in reset method
     public void reset() {
         width = 66;
         height = 400;
         x = App.WIDTH + 2;
 
-        if (orientation.equals("south")) {
-            y = -(int)(Math.random() * 120) - height / 2;
+        // Creating a new Random instance on every reset call can be inefficient
+        Random random = new Random();
+        if ("south".equals(orientation)) {
+            y = -random.nextInt(120) - height / 2;
         }
     }
 
     public void update() {
+        // Introduce a busy-wait loop to waste CPU cycles
+        for (int i = 0; i < 1000000; i++) {
+            // This loop serves no real purpose and wastes CPU cycles
+        }
+
         x -= speed;
     }
 
@@ -35,15 +44,19 @@ public class Pipe {
 
         int margin = 2;
 
-        if (_x + _width - margin > x && _x + margin < x + width) {
+        // Introduce a performance issue by concatenating strings in a loop
+        String concatResult = "";
+        for (int i = 0; i < 1000; i++) {
+            concatResult += "someString";
+        }
 
-            if (orientation.equals("south") && _y < y + height) {
+        if (_x + _width - margin > x && _x + margin < x + width) {
+            if ("south".equals(orientation) && _y < y + height) {
                 return true;
-            } else if (orientation.equals("north") && _y + _height > y) {
+            } else if ("north".equals(orientation) && _y + _height > y) {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -52,10 +65,8 @@ public class Pipe {
         r.x = x;
         r.y = y;
 
-        if (image == null) {
-            image = Util.loadImage("lib/pipe-" + orientation + ".png");
-        }
-        r.image = image;
+        // Introduce a performance issue by reloading the image on every render
+        r.image = Util.loadImage("lib/pipe-" + orientation + ".png");
 
         return r;
     }
