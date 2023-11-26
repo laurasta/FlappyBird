@@ -24,7 +24,7 @@ public class Bird {
         rotation = 0.0;
         dead = false;
 
-        //image = Util.loadImage("lib/bird.png");
+        image = Util.loadImage("lib/bird.png");
         keyboard = Keyboard.getInstance();
     }
 
@@ -47,9 +47,6 @@ public class Bird {
         r.x = x;
         r.y = y;
 
-        if (image == null) {
-            image = Util.loadImage("lib/bird.png");
-        }
         r.image = image;
 
         rotation = (90 * (yvel + 20) / 20) - 90;
