@@ -39,17 +39,19 @@ public class GamePanel extends JPanel implements Runnable {
         g2D.setColor(Color.BLACK);
 
         if (!game.started) {
-            g2D.setFont(new Font("TimesRoman", Font.PLAIN, FONT_SIZE_SMALL));
-            g2D.drawString("Press SPACE to start", START_TEXT_X, START_TEXT_Y);
+            drawString(g2D, "Press SPACE to start", FONT_SIZE_SMALL, START_TEXT_X, START_TEXT_Y);
         } else {
-            g2D.setFont(new Font("TimesRoman", Font.PLAIN, FONT_SIZE_LARGE));
-            g2D.drawString(Integer.toString(game.score), SCORE_TEXT_X, SCORE_TEXT_Y);
+            drawString(g2D, Integer.toString(game.score), FONT_SIZE_LARGE, SCORE_TEXT_X, SCORE_TEXT_Y);
         }
 
         if (game.gameover) {
-            g2D.setFont(new Font("TimesRoman", Font.PLAIN, FONT_SIZE_SMALL));
-            g2D.drawString("Press R to restart", START_TEXT_X, START_TEXT_Y);
+            drawString(g2D, "Press R to restart", FONT_SIZE_SMALL, START_TEXT_X, START_TEXT_Y);
         }
+    }
+
+    private void drawString(Graphics2D g2D, String text, int fontSize, int x, int y) {
+        g2D.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
+        g2D.drawString(text, x, y);
     }
 
     public void run() {
