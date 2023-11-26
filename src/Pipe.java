@@ -11,7 +11,6 @@ public class Pipe {
 
     public String orientation;
 
-    private Image image;
 
     public Pipe(String orientation) {
         this.orientation = orientation;
@@ -32,11 +31,6 @@ public class Pipe {
     }
 
     public void update() {
-        // Introduce a busy-wait loop to waste CPU cycles
-        for (int i = 0; i < 1000000; i++) {
-            // This loop serves no real purpose and wastes CPU cycles
-        }
-
         x -= speed;
     }
 
@@ -61,13 +55,19 @@ public class Pipe {
     }
 
     public Render getRender() {
+        Render r = createRender();
+        loadImage(r);
+        return r;
+    }
+
+    private Render createRender() {
         Render r = new Render();
         r.x = x;
         r.y = y;
-
-        // Introduce a performance issue by reloading the image on every render
-        r.image = Util.loadImage("lib/pipe-" + orientation + ".png");
-
         return r;
+    }
+
+    private void loadImage(Render render) {
+        render.image = Util.loadImage("lib/pipe-" + orientation + ".png");
     }
 }
