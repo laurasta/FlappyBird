@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -15,8 +13,8 @@ public class GamePanel extends JPanel implements Runnable {
     private static final int SCORE_TEXT_Y = 465;
     private static final int THREAD_SLEEP_DURATION = 25;
 
-    public GamePanel() {
-        game = new Game();
+    public GamePanel(Keyboard keyboard) {
+        game = new Game(keyboard);
         new Thread(this).start();
     }
 

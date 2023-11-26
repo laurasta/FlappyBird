@@ -19,8 +19,8 @@ public class Game {
     public Boolean gameover;
     public Boolean started;
 
-    public Game() {
-        keyboard = Keyboard.getInstance();
+    public Game(Keyboard keyboard) {
+        this.keyboard = keyboard;
         restart();
     }
 
