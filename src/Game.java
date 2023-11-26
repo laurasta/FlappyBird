@@ -109,7 +109,7 @@ public class Game {
                 if (pipe.x - pipe.width < 0) {
                     if (northPipe == null) {
                         northPipe = pipe;
-                    } else if (southPipe == null) {
+                    } else {
                         southPipe = pipe;
                         break;
                     }
