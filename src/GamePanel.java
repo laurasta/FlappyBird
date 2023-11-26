@@ -7,6 +7,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Game game;
 
+    private static final int FONT_SIZE_SMALL = 20;
+    private static final int FONT_SIZE_LARGE = 24;
+    private static final int START_TEXT_X = 150;
+    private static final int START_TEXT_Y = 240;
+    private static final int SCORE_TEXT_X = 10;
+    private static final int SCORE_TEXT_Y = 465;
+    private static final int THREAD_SLEEP_DURATION = 25;
+
     public GamePanel() {
         game = new Game();
         new Thread(this).start();
@@ -31,16 +39,16 @@ public class GamePanel extends JPanel implements Runnable {
         g2D.setColor(Color.BLACK);
 
         if (!game.started) {
-            g2D.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-            g2D.drawString("Press SPACE to start", 150, 240);
+            g2D.setFont(new Font("TimesRoman", Font.PLAIN, FONT_SIZE_SMALL));
+            g2D.drawString("Press SPACE to start", START_TEXT_X, START_TEXT_Y);
         } else {
-            g2D.setFont(new Font("TimesRoman", Font.PLAIN, 24));
-            g2D.drawString(Integer.toString(game.score), 10, 465);
+            g2D.setFont(new Font("TimesRoman", Font.PLAIN, FONT_SIZE_LARGE));
+            g2D.drawString(Integer.toString(game.score), SCORE_TEXT_X, SCORE_TEXT_Y);
         }
 
         if (game.gameover) {
-            g2D.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-            g2D.drawString("Press R to restart", 150, 240);
+            g2D.setFont(new Font("TimesRoman", Font.PLAIN, FONT_SIZE_SMALL));
+            g2D.drawString("Press R to restart", START_TEXT_X, START_TEXT_Y);
         }
     }
 
@@ -48,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
         try {
             while (true) {
                 update();
-                Thread.sleep(25);
+                Thread.sleep(THREAD_SLEEP_DURATION);
             }
         }
         catch (Exception e) {
